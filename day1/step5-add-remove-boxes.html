@@ -31,15 +31,25 @@
             }else{
                 alert("nothing to remove")
             }
+        };
+       /*  function boxClickHandler(evt){
+            document.getElementsByClassName("container")[0].removeChild(evt.target);
+        } */
+        function removeSelectedBox(evt){
+            if(evt.target.getAttribute("class") === "box"){
+                document.getElementsByClassName("container")[0].removeChild(evt.target);
+            }
         }
         function init(){
            for(let i = 0; i < 50; i++){
             let box = document.createElement("div");
             box.setAttribute("class", "box");
             box.textContent = i+1;
+            // box.addEventListener("click", boxClickHandler);
             document.getElementsByClassName("container")[0].appendChild(box);
            };
            document.getElementsByTagName("button")[0].addEventListener("click", removeFirst);
+           document.getElementsByClassName("container")[0].addEventListener("click", removeSelectedBox);
         };
         window.addEventListener("load", init);
     </script>

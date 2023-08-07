@@ -88,13 +88,15 @@
 
         var getCostPrice = function(){
             return 500;
-        }
+        };
         var cart = {
             title : "I Am Cart",
-            getCostPrice : function(){
+            getCostPrice : function()
+            {
                 return 100
             },
-            getSellingPrice : () => {
+            getSellingPrice : () => 
+            {
                 var calculateProfit = () => {
                     return this.getCostPrice() * 0.2;
                 }
