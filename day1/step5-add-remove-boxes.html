@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 600px;
+            height: 400px;
+            background-color: darkslategray;
+            margin: auto;
+            overflow: auto;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: darkorange;
+            float: left;
+            margin: 5px;
+            text-align: center;
+            font-size: 36px;
+            line-height: 100px;
+        }
+    </style>
+    <script>
+        function removeFirst(){
+            let selectedBox = document.getElementsByClassName("container")[0].firstChild;
+            if(selectedBox){
+                document.getElementsByClassName("container")[0].removeChild(selectedBox);
+            }else{
+                alert("nothing to remove")
+            }
+        }
+        function init(){
+           for(let i = 0; i < 50; i++){
+            let box = document.createElement("div");
+            box.setAttribute("class", "box");
+            box.textContent = i+1;
+            document.getElementsByClassName("container")[0].appendChild(box);
+           };
+           document.getElementsByTagName("button")[0].addEventListener("click", removeFirst);
+        };
+        window.addEventListener("load", init);
+    </script>
+</head>
+<body>
+    <button>Remove First</button>
+    <button>Remove Last</button>
+    <hr>
+    <div class="container"></div>
+</body>
+</html>
