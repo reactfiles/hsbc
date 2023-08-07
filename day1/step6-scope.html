@@ -17,7 +17,37 @@
 
         console.log(cart.getSellingPrice()); */
 
-        var cart = {
+       /*  var cart = {
+            title : "I Am Cart",
+            getCostPrice : function(){
+                return 100
+            },
+            getSellingPrice : function(){
+                // console.log(this.title);
+                var calculateProfit = function(scope){
+                    return scope.getCostPrice() * 0.2;
+                }
+                return this.getCostPrice() + calculateProfit(this);
+            }
+        };
+ */
+   /*  var cart = {
+            title : "I Am Cart",
+            getCostPrice : function(){
+                return 100
+            },
+            getSellingPrice : function(){
+                // console.log(this.title);
+                var scope = this;
+                var calculateProfit = function(){
+                    return scope.getCostPrice() * 0.2;
+                }
+                return this.getCostPrice() + calculateProfit();
+            }
+        };
+ */
+
+    /* var cart = {
             title : "I Am Cart",
             getCostPrice : function(){
                 return 100
@@ -26,10 +56,51 @@
                 var calculateProfit = function(){
                     return this.getCostPrice() * 0.2;
                 }
+                return this.getCostPrice() + calculateProfit.call(this);
+            }
+        }; */
+
+        /* var cart = {
+            title : "I Am Cart",
+            getCostPrice : function(){
+                return 100
+            },
+            getSellingPrice : function(){
+                var calculateProfit = function(){
+                    return this.getCostPrice() * 0.2;
+                }
+                return this.getCostPrice() + calculateProfit.apply(this);
+            }
+        }; */
+
+        /* var cart = {
+            title : "I Am Cart",
+            getCostPrice : function(){
+                return 100
+            },
+            getSellingPrice : function(){
+                var calculateProfit = function(){
+                    return this.getCostPrice() * 0.2;
+                }
+                return this.getCostPrice() + calculateProfit.bind(this)();
+            }
+        }; */
+
+        var getCostPrice = function(){
+            return 500;
+        }
+        var cart = {
+            title : "I Am Cart",
+            getCostPrice : function(){
+                return 100
+            },
+            getSellingPrice : () => {
+                var calculateProfit = () => {
+                    return this.getCostPrice() * 0.2;
+                }
                 return this.getCostPrice() + calculateProfit();
             }
         };
-
         console.log(cart.getSellingPrice());// ??? 
     </script>
 </head>
