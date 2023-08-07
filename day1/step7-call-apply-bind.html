@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var batman = {
+            title : "Batman",
+            firstname : "Bruce",
+            lastname : "Wayne",
+            fullname : function(message, city){
+                return message+" | "+this.firstname+" "+this.lastname+" is from "+city;
+            }
+        };
+        var flash = {
+            title : "Flash",
+            firstname : "Berry",
+            lastname : "Allen"
+        };
+        var superman = {
+            title : "Superman",
+            firstname : "Clark",
+            lastname : "Kent"
+        };
+
+        console.log(batman.title);
+        // console.log(batman.fullname.call(flash, "I am flash", "New York"));
+        // console.log(batman.fullname.apply(superman,["I am Superman", "Metropolis"]));
+
+        var superbat = batman.fullname.bind(superman);
+
+        console.log();
+        console.log( superbat("I am Superman", "Metropolis"));
+        console.log( superbat("I am Kriyptonian", "Metropolis"));
+        // console.log(batman.fullname.bind(superman)("I am Superman", "Metropolis"));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
