@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var hero = {
+                title : "Ironman",
+                firstname : "tony",
+                lastname : "stark",
+                power : 7
+            };
+       //  var temphero = hero;
+
+       /*  var herotitle = hero.title;
+        var herofirstname = hero.firstname;
+        var herolastname = hero.lastname;
+        var heropower = hero.power;
+         */
+/*         var herotitle = hero.title,
+            herofirstname = hero.firstname,
+            herolastname = hero.lastname,
+            heropower = hero.power; */
+        
+       //  var { title : herotitle, firstname : herofirstname, lastname : herolastname, power : heropower} = hero;  
+        var { title, firstname, lastname , power} = hero;  
+
+        // var heroclone = JSON.parse( JSON.stringify(hero));
+        var heroclone = {...hero};
+
+        heropower.power = 70;
+        document.addEventListener("DOMContentLoaded", function(){
+           //  document.getElementsByClassName("container")[0].innerHTML =  "<h1>"+hero.title+"</h1><h2>"+hero.firstname+" "+hero.lastname+"</h2> <h3>"+hero.power+"</h3>"
+            document.getElementsByClassName("container")[0].innerHTML =  `<h1>${temphero.title}</h1>
+                                                                          <h2>${temphero.firstname+" "+temphero.lastname}</h2> 
+                                                                          <h3>${ temphero.power }</h3>`
+        });
+        console.log(temphero.power);// 70
+        console.log(hero.power);// 70
+    </script>
+</head>
+<body>
+<div class="container"></div>
+</body>
+</html>
