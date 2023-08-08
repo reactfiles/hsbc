@@ -11,5 +11,4 @@ https://www.youtube.com/watch?v=8aGhZQkoFbQ
 ### Tools for performance
 <a href="https://clinicjs.org/"> Clinic.JS </a>
 
-Understanding and Debugging Memory Leaks in Your Node.js Applications
-https://www.youtube.com/watch?v=hliOMEQRqf8
+<a href="https://www.youtube.com/watch?v=O1YP8QP9gLA"> Debugging in production </a>
