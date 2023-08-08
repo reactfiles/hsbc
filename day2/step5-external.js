@@ -2,8 +2,9 @@
 let axios = require("axios");
 let fs = require("fs");
 
+// https://www.npmjs.com/package/axios#request-config
 
-axios.get("https://www.hsbc.co.in/")
+axios.get("http://hsbc.co.in")
 .then(res => {
     fs.writeFile("pages/temp.html",res.data,"utf-8",
     function(error){
