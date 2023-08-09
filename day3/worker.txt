@@ -1,0 +1,63 @@
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+    if(req.url == "/"){
+        res.writeHead(200, { "Content-Type" : "text/plain"});
+        res.end("welcome to home page")
+    }else if(req.url == "/delay"){
+        let count = 0;
+        let start = Date.now();
+        for(let i = 0; i < 10**10; i++){
+            count++;
+        };
+        res.writeHead(200, { "Content-Type" : "text/plain"});
+        res.write("Initial Value \n");
+        res.end(`delayed page ${ (Date.now() - start) / 1000} seconds was taken to count till ${count}`);
+    }else{
+         res.end("404 page")
+    }
+});
+
+server.listen(5000, () => console.log("server is running on port 5000 "));
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+worker.js
+
+const { parentPort } = require("worker_threads");
+
+let message = 0;
+
+for(let i = 0; i < 10**10; i++){
+    message++;
+};
+
+parentPort.postMessage(message);
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+const http = require("http");
+const { Worker } = require("worker_threads");
+const worker = new Worker("./worker.js");
+
+const server = http.createServer((req, res) => {
+    if(req.url == "/"){
+        res.writeHead(200, { "Content-Type" : "text/plain"});
+        res.end("welcome to home page")
+    }else if(req.url == "/delay"){
+        let start = Date.now();
+        res.writeHead(200, { "Content-Type" : "text/plain"});
+        res.write("Initial Value \n");
+        worker.on("message", (data) => {
+            res.write(`delayed page ${ (Date.now() - start) / 1000} seconds was taken to count till ${data}`);
+            res.end();
+        });
+    }else{
+         res.end("404 page")
+    }
+});
+
+server.listen(5000, () => console.log("server is running on port 5000 "));
+
+
