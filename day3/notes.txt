@@ -1,0 +1,25 @@
+npm i pm2 -g 
+npx pm2 start index.js -i 5
+npx pm2 start index.js -i max / 'max'
+npx pm2 start index.js -i -5
+pm2 reload all
+pm2 kill all 
+pm2 stop 
+pm2 monit
+++++++++++++++++++++++++++++++++++
+
+# Start all applications
+pm2 start ecosystem.config.js
+
+# Stop all
+pm2 stop ecosystem.config.js
+
+# Restart all
+pm2 restart ecosystem.config.js
+
+# Reload all
+pm2 reload ecosystem.config.js
+
+# Delete all
+pm2 delete ecosystem.config.js
+
