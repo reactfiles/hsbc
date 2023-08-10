@@ -30,7 +30,8 @@ export default Main;
 
 
 +++++++++++++++++++++++++++++++++++++++++++
-
+layout.js
+----------
 
   export const metadata = {
   title: 'Next.js',
