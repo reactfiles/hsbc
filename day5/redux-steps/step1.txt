@@ -1,0 +1,42 @@
+const redux = require("redux");
+let createStore = redux.legacy_createStore;
+
+// action type
+const ADD_HERO = "ADD_HERO";
+
+// action creator
+let addHero = ()=>{
+    return {
+        type : ADD_HERO
+    } 
+};
+
+const initialState = {
+    numOfHeroes : 0
+}
+
+const reducer = (state = initialState, action) => {
+    switch( action.type){
+        case ADD_HERO : return { 
+            ...state,
+            numOfHeroes : state.numOfHeroes + 1
+        }
+        default : return state
+    }
+};
+
+const store = createStore(reducer);
+
+console.log( store.getState() );
+
+store.subscribe(function(){
+    console.log( store.getState()  );
+});
+
+store.dispatch(addHero());
+store.dispatch(addHero());
+store.dispatch(addHero());
+store.dispatch(addHero());
+
+
+
