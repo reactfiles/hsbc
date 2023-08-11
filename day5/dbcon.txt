@@ -1,0 +1,9 @@
+async function getData(){
+  let uri = "mongodb+srv://admin:8B1cM4Bb3VJpy615@cluster0.ubqymhc.mongodb.net/?retryWrites=true&w=majority"
+  let dbName = "heroesdb";
+  let client = await MongoClient.connect(uri);
+  let collection = client.db(dbName).collection("heros");
+  let list = await collection.find({}).toArray();
+  client.close();
+  return list;
+}
