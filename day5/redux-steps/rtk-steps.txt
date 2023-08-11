@@ -1,0 +1,133 @@
+const configureStore = require("@reduxjs/toolkit").configureStore;
+const heroReducer = require("../features/hero/hero.slice");
+const movieReducer = require("../features/movie/movie.slice");
+const reduxLogger = require("redux-logger");
+
+// adding logger middleware
+const logger = reduxLogger.createLogger();
+// also does the job of combine reducers
+const store = configureStore({
+    reducer : {
+        hero : heroReducer,
+        movie : movieReducer
+    },
+    // this function recieves a function implicitly know as getDefaultMiddleware which returns an array
+    // so we use the concat a method of array to add the middleware to exiting list of middlewares
+    // configureStore by default includes few internal middlewares so we append our middlewares to it via concat
+    middleware : ( getDefaultMiddleware ) => getDefaultMiddleware().concat(logger)
+})
+
+module.exports = store ;
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+const createSlice = require("@reduxjs/toolkit").createSlice;
+const movieActions = require("../movie/movie.slice");
+
+/* 
+createSlice takes 3 configurations  
+1. name
+2. intialState 
+3. reducers
+*/
+
+const initialState = {
+    numOfHeroes : 0
+};
+
+// RTK will generate action types based on slice name and reducer name
+// hero/addHero hero/removeHero and hero/resetHero in this case
+
+const heroSlice = createSlice({
+    name : "hero",
+    initialState,
+     // these can not be an arrow function without braces.
+    reducers : {
+        addHero : (state) => {
+            state.numOfHeroes++
+        },
+        removeHero : (state) => {
+            state.numOfHeroes--
+        },
+        resetHero : (state, action) => {
+            state.numOfHeroes = action.payload;
+        }
+    },
+    /* 
+    extraReducers : {
+        ['movie/addMovie'] : (state) => {
+            state.numOfHeroes++;
+        }
+    } 
+    */
+    /*    
+    extraReducers : (builder) => {
+        builder.addCase(movieActions.addMovie, (state) => {
+            state.numOfHeroes++;
+        })
+    } 
+    */
+}); 
+
+// default export 
+module.exports = heroSlice.reducer;
+// named export 
+module.exports.heroActions = heroSlice.actions;
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+const createSlice = require("@reduxjs/toolkit").createSlice;
+
+const initialState = {
+    numOfMovies : 0
+};
+
+// RTK will generate action types based on slice name and reducer name
+// movie/addMovie movie/removeMovie and movie/resetMovie in this case
+
+const movieSlice = createSlice({
+    name : "movie",
+    initialState,
+    reducers : {
+        // these can not be an arrow function without braces.
+        addMovie : (state) => {state.numOfMovies++},
+        removeMovie : (state) => {state.numOfMovies--},
+        resetMovie : (state, action) => {state.numOfMovies = action.payload}
+    }
+});
+
+// default export 
+module.exports = movieSlice.reducer;
+// named export 
+module.exports.movieActions = movieSlice.actions;
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+const store = require("./app/store");
+const heroActions = require("./features/hero/hero.slice").heroActions;
+const movieActions = require("./features/movie/movie.slice").movieActions;
+
+// console.log("Start State", store.getState());
+
+// const unsubscribe = store.subscribe(() => console.log("Updated state ", store.getState()));
+const unsubscribe = store.subscribe(() => {});
+
+store.dispatch( heroActions.addHero() )
+store.dispatch( heroActions.addHero() )
+store.dispatch( heroActions.addHero() )
+store.dispatch( heroActions.addHero() )
+store.dispatch( heroActions.removeHero() )
+store.dispatch( heroActions.resetHero(10) )
+console.log("++++++++++++++++++++++++++++++++")
+store.dispatch( movieActions.addMovie() )
+store.dispatch( movieActions.addMovie() )
+store.dispatch( movieActions.addMovie() )
+store.dispatch( movieActions.addMovie() )
+store.dispatch( movieActions.removeMovie() )
+store.dispatch( movieActions.resetMovie(10) )
+
