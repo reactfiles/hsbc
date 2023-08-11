@@ -1,0 +1,24 @@
+import styles from './page.module.css';
+
+/* 
+const res = await fetch("https://jsonplaceholder.typicode.com/users",{ next : { revalidate : 10 }});
+const res = await fetch("https://jsonplaceholder.typicode.com/users",{ cache : "no-store" }); // 'no-store'. This will fetch data dynamically, on every request
+const res = await fetch("https://jsonplaceholder.typicode.com/users",{ cache : "force-cache" }); // 'force-cache' is the default
+const res = await fetch("https://jsonplaceholder.typicode.com/users",{ cache : "no-cache" });
+const res = await fetch("https://jsonplaceholder.typicode.com/users",{ cache : "reload" });
+*/
+
+async function fetchData(){
+  let res = await fetch("https://jsonplaceholder.typicode.com/users")
+  return await res.json(); 
+}
+
+
+export default async function Home() {
+  let userdata = await fetchData();
+  return (
+    <main className={styles.main}>
+      <ol>{ userdata.map( user => <li key={user.id}>{ user.name }</li>) }</ol>
+    </main>
+  )
+}
